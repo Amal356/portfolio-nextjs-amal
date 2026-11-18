@@ -2,7 +2,7 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+RUN npm config set fetch-retries 5 && npm config set fetch-retry-maxtimeout 120000 && npm config set fetch-timeout 600000 && npm config set maxsockets 4 && npm ci --no-audit --no-fund
 
 FROM node:22-alpine AS build
 WORKDIR /app
