@@ -33,7 +33,7 @@ jobs:
 
       - name: 2-3. Build de l'application et construction de l'image Docker
         run: |
-          docker build --build-arg APP_VERSION="$VERSION" -t "$IMAGE:$VERSION" -t "$IMAGE:latest" .
+          docker build --network host --build-arg APP_VERSION="$VERSION" -t "$IMAGE:$VERSION" -t "$IMAGE:latest" .
           docker images "$IMAGE" --format "{{.Repository}}:{{.Tag}}  {{.Size}}"
 
       - name: 4. Authentification auprès de Docker Hub
